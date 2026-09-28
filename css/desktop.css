@@ -1,0 +1,42 @@
+/* ===== Desktop styles (min-width: 769px) ===== */
+
+.preview-row {
+  flex-direction: row;
+  gap: 1.5rem;
+}
+
+.preview-card canvas {
+  max-height: 500px;
+}
+
+.controls-row {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.actions-row {
+  flex-direction: row;
+  justify-content: center;
+}
+
+.actions-row .btn {
+  min-width: 180px;
+}
+
+.download-row {
+  justify-content: center;
+}
+
+.upload-btn {
+  margin-top: 0.5rem;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0.75rem;
+  font-size: 0.8rem;
+}

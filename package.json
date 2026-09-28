@@ -1,0 +1,25 @@
+{
+  "name": "document-scanner",
+  "version": "1.0.0",
+  "description": "Free online document scanner with OpenCV.js — auto corner detection, perspective correction, shadow removal, and PNG/PDF export. 100% client-side, no backend.",
+  "private": true,
+  "scripts": {
+    "dev": "npx serve dist -s -l 3000",
+    "build": "node scripts/build.js",
+    "lint": "echo 'No lint configured — static HTML/CSS/JS project' && exit 0",
+    "format": "echo 'No formatter configured — manual formatting'"
+  },
+  "devDependencies": {
+    "serve": "^14.2.1"
+  },
+  "keywords": [
+    "document-scanner",
+    "opencv",
+    "opencvjs",
+    "pdf",
+    "image-processing",
+    "github-pages"
+  ],
+  "author": "",
+  "license": "MIT"
+}

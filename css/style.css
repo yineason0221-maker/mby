@@ -1,0 +1,338 @@
+/* ===== Base / shared styles ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  background: #f5f6fa;
+  color: #2d3436;
+  line-height: 1.5;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+/* ===== Header ===== */
+.header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2d3436;
+}
+
+.header h1 .doc {
+  color: #0984e3;
+}
+
+.subtitle {
+  font-size: 0.9rem;
+  color: #636e72;
+  margin-top: 0.3rem;
+}
+
+/* ===== Upload Section ===== */
+.upload-section {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.upload-area {
+  border: 2px dashed #dfe6e9;
+  border-radius: 12px;
+  padding: 2rem 1rem;
+  background: #fff;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  touch-action: manipulation;
+}
+
+.upload-area:hover {
+  border-color: #0984e3;
+  background: #f8f9fc;
+}
+
+.upload-area.dragover {
+  border-color: #0984e3;
+  background: #e3f2fd;
+  transform: scale(1.02);
+}
+
+.upload-area input[type="file"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.upload-prompt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.upload-icon {
+  font-size: 2.5rem;
+}
+
+.upload-text {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2d3436;
+}
+
+.upload-hint {
+  font-size: 0.8rem;
+  color: #636e72;
+}
+
+.upload-btn {
+  margin-top: 1rem;
+  padding: 0.6rem 1.5rem;
+  font-size: 0.95rem;
+}
+
+/* ===== Editor Section ===== */
+.editor-section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.preview-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.preview-card {
+  flex: 1;
+  text-align: center;
+}
+
+.preview-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #636e72;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.preview-card canvas {
+  max-width: 100%;
+  border-radius: 8px;
+  background: #f5f6fa;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  display: block;
+}
+
+/* ===== Controls ===== */
+.controls-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.control-group {
+  flex: 1;
+}
+
+.control-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #636e72;
+  margin-bottom: 0.4rem;
+  display: block;
+}
+
+.mode-selector {
+  display: flex;
+  gap: 0.3rem;
+  background: #f5f6fa;
+  padding: 0.3rem;
+  border-radius: 8px;
+}
+
+.mode-btn {
+  flex: 1;
+  padding: 0.5rem;
+  border: none;
+  background: transparent;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #636e72;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mode-btn:hover {
+  color: #0984e3;
+}
+
+.mode-btn.active {
+  background: #0984e3;
+  color: #fff;
+}
+
+/* ===== Buttons ===== */
+.btn {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  border: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  touch-action: manipulation;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: #0984e3;
+  color: #fff;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #0767b3;
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: #f5f6fa;
+  color: #2d3436;
+  border: 1px solid #dfe6e9;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: #e9ecef;
+}
+
+.btn-success {
+  background: #00b894;
+  color: #fff;
+}
+
+.btn-success:hover:not(:disabled) {
+  background: #009688;
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  background: transparent;
+  color: #0984e3;
+  border: 1px solid #0984e3;
+}
+
+.btn-outline:hover:not(:disabled) {
+  background: #0984e3;
+  color: #fff;
+}
+
+/* ===== Action Rows ===== */
+.actions-row,
+.download-row {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.actions-row {
+  margin-bottom: 1.25rem;
+  justify-content: center;
+}
+
+.download-row {
+  justify-content: center;
+}
+
+.download-row .btn {
+  flex: 1;
+}
+
+/* ===== Status ===== */
+.status-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #2d3436;
+  color: #fff;
+  padding: 0.6rem 1rem;
+  font-size: 0.85rem;
+  text-align: center;
+  z-index: 100;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+
+.status-bar.visible {
+  transform: translateY(0);
+}
+
+/* ===== Shared utilities ===== */
+.hidden {
+  display: none !important;
+}
+
+.spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ===== Footer ===== */
+.footer {
+  text-align: center;
+  padding: 1rem;
+  color: #636e72;
+  font-size: 0.8rem;
+}
+
+.footer a {
+  color: #0984e3;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}

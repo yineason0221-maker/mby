@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DocuScan — Free Online Document Scanner</title>
+  <meta name="description" content="Scan documents with your phone or computer. Auto-detects corners, corrects perspective, removes shadows, and exports PNG or PDF." />
+  <link rel="icon" href="data:," />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/mobile.css" media="(max-width: 768px)" />
+  <link rel="stylesheet" href="css/desktop.css" media="(min-width: 769px)" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
+  <script type="module" src="js/app.js" defer></script>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>DocuScan</h1>
+      <p class="subtitle">Auto-detect corners · Perspective correction · Shadow removal</p>
+    </header>
+
+    <section class="upload-section">
+      <div class="upload-area" id="uploadArea">
+        <input type="file" id="fileInput" accept="image/*" capture="environment" />
+        <div class="upload-prompt">
+          <span class="upload-icon">📄</span>
+          <span class="upload-text">tap or drag an image here</span>
+          <span class="upload-hint">jpg, png, webp • max 10MB</span>
+        </div>
+      </div>
+      <label for="fileInput" class="btn btn-primary upload-btn">
+        choose file
+      </label>
+    </section>
+
+    <section class="editor-section" id="editorSection" style="display:none;">
+      <div class="preview-row">
+        <div class="preview-card">
+          <label class="preview-label">Original</label>
+          <canvas id="originalCanvas"></canvas>
+        </div>
+        <div class="preview-card">
+          <label class="preview-label">Scanned</label>
+          <canvas id="scannedCanvas"></canvas>
+        </div>
+      </div>
+
+      <div class="controls-row">
+        <div class="control-group">
+          <label class="control-label">Scan Mode</label>
+          <div class="mode-selector" id="modeSelector">
+            <button class="mode-btn active" data-mode="color">Color</button>
+            <button class="mode-btn" data-mode="gray">Grayscale</button>
+            <button class="mode-btn" data-mode="bw">Black & White</button>
+          </div>
+        </div>
+
+        <button class="btn btn-secondary" id="resetBtn">new scan</button>
+      </div>
+
+      <div class="actions-row">
+        <button class="btn btn-success" id="processBtn">
+          <span id="processText">scan document</span>
+        </button>
+      </div>
+
+      <div class="download-row">
+        <button class="btn btn-outline" id="downloadPng">download PNG</button>
+        <button class="btn btn-outline" id="downloadPdf">download PDF</button>
+      </div>
+    </section>
+  </div>
+
+  <div class="status-bar" id="statusBar"></div>
+
+  <script src="js/cv-handler.js"></script>
+</body>
+</html>
