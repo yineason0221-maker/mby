@@ -1,87 +1,86 @@
-# DocuScan — Free Online Document Scanner
+# DocuScan — 免費線上掃掖器
 
-A privacy-first, **100 % client-side** document scanner that runs entirely in your browser.  
-Upload a photo of any document — DocuScan auto-detects the four corners, corrects perspective, removes shadows, and lets you download a clean **PNG** or **PDF**.
+一個**完全在瀏覽器端**執行的隱私友好文件掃描器。  
+上傳照片或使用手機相機拍攝文件 — DocuScan 會自動偵測四個角落、校正透視、去陰影，並以**影印機般清晰**的效果輸出 **PNG** 或 **PDF**。
 
-## ✨ Features
+## ✨ 功能
 
-| Feature | Status |
+| 功能 | 狀態 |
 |---|---|
-| Plain HTML + CSS + JavaScript (no React, no Python) | ✅ |
-| OpenCV.js auto corner detection | ✅ |
-| Auto perspective / skew correction | ✅ |
-| Auto shadow & background removal | ✅ |
-| 3 scan modes (Color / Grayscale / Black & White) | ✅ |
-| Download PNG | ✅ |
-| Download PDF | ✅ |
-| Responsive (mobile + desktop) | ✅ |
-| One-click deploy to GitHub Pages (free) | ✅ |
+| 純 HTML + CSS + JavaScript（無 React、無 Python） | ✅ |
+| OpenCV.js 自動偵測文件四個角落 | ✅ |
+| 自動拉平與透視校正 | ✅ |
+| 自動去陰影與背景 | ✅ |
+| 手機相機拍照掃描 | ✅ |
+| 三種掃描模式（彩色／灰階／黑白） | ✅ |
+| 下載 PNG | ✅ |
+| 下載 PDF | ✅ |
+| RWD 手機與電腦雙端支援 | ✅ |
+| 一鍵部署到 GitHub Pages（免費網址） | ✅ |
 
-## 🚀 Quick — Deploy to GitHub Pages in 1 click
+## 🚀 部署到 GitHub Pages（一鍵）
 
-[![Deploy to GitHub Pages](https://github.com/stevekrouse/GitHubPagesDeployButton/blob/master/button.svg?raw=true)](https://github.com/new?template=your-repo-here&filename=README.md)
+### 步驟 1 — 初始化 GitHub 倉庫
 
-### One-click setup (fork & deploy)
-
-1. **Fork** this repo (or create a new repo from this template).
-2. Go to **Settings → Pages → Build and deployment**.
-3. Set **Source** → **GitHub Actions**.
-4. The included GitHub Actions workflow (`.github/workflows/deploy.yml`) automatically builds and deploys on every push to `main`.
-5. Your site is live at `https://<your-username>.github.io/<repo-name>/`!
-
-> The deploy workflow triggers **automatically** on every push to `main`. You can also trigger it manually via **Actions → Deploy to GitHub Pages → Run workflow**.
-
-## 🛠 Local development
+在終端機執行以下指令（或在瀏覽器 [github.com/new](https://github.com/new) 建立名為 `mby` 的公開倉庫）：
 
 ```bash
-# 1. Install (no dependencies required for the static build, but Node is needed for dev server)
-npm install
-
-# 2. Serve locally
-npm run dev
-# → http://localhost:3000
-
-# 3. Build for production
-npm run build
+gh auth login --web
+gh repo create yineason0221-maker/mby --public --source=. --push
 ```
 
-## 📖 How it works
+### 步驟 2 — 啟用 GitHub Pages
 
-1. **Upload** — Drag & drop or use the file picker (supports JPG, PNG, WebP, up to 10 MB).
-2. **Detect** — OpenCV.js finds the document's four corners using Canny edge detection + contour approximation.
-3. **Correct** — A perspective transform (homography) flattens the document to a clean rectangle.
-4. **Enhance** — Background division removes shadows and normalises the background.
-5. **Mode** — Choose Color, Grayscale, or Black & White output.
-6. **Export** — Download as PNG or save as PDF.
+推送完成後前往：
+> **Settings → Pages → Build and deployment → Source** 選擇 **GitHub Actions**
 
-## 📁 Project structure
+等待 Actions 執行完畢，您的網站即上線：
+```
+https://yineason0221-maker.github.io/mby/
+```
+
+> 推送到 `main` 分支時會**自動建置並部署**，無需手動操作。
+
+## 🛠️ 本地開發
+
+```bash
+npm install      # 安裝 devDependency（仅需 serve）
+npm run build    # 建置到 dist/
+npm run dev      # 啟動本地伺服器 http://localhost:3000
+```
+
+## 📖 使用說明
+
+1. **拍照** — 點擊「拍照掃描」使用手機相機，或點擊「選取圖片」從相簿選擇。
+2. **偵測** — OpenCV.js 自動偵測文件邊緣的四個角落。
+3. **校正** — 透視變換將文件拉平為矩形。
+4. **增強** — 背景除法演算法去除陰影，使背景變白。
+5. **模式** — 選擇「彩色」、「灰階」或「黑白」。
+6. **匯出** — 下載 PNG 或 PDF。
+
+## 📁 專案架構
 
 ```
 document-scanner/
-├── index.html            # Main page
+├── index.html            # 主頁面
 ├── css/
-│   ├── style.css         # Base styles
-│   ├── mobile.css        # Mobile (≤ 768px)
-│   └── desktop.css       # Desktop (≥ 769px)
+│   ├── style.css         # 共用樣式
+│   ├── mobile.css        # 手機版（≤768px）
+│   └── desktop.css       # 桌面版（≥769px）
 ├── js/
-│   ├── app.js            # App logic (upload, UI, download)
-│   └── cv-handler.js     # OpenCV.js processing (corners, warp, shadow removal)
-├── .github/
-│   └── workflows/
-│       └── deploy.yml    # GitHub Actions → GitHub Pages
+│   ├── app.js            # 應用邏輯（上傳、相機、UI、下載）
+│   └── cv-handler.js     # OpenCV.js 處理（角點、透視、去陰影、模式）
+├── scripts/
+│   └── build.js          # 跨平台建置腳本
+├── .github/workflows/
+│   └── deploy.yml        # 自動部署 workflow
 ├── package.json
 └── README.md
 ```
 
-## 🌐 Browser support
+## 🔒 隱私政策
 
-| Chrome | Firefox | Safari | Edge | iOS Safari | Android Chrome |
-|--------|---------|--------|------|------------|-----------------|
-| ✅ 70+ | ✅ 65+  | ✅ 13+ | ✅ 79+ | ✅ 13+     | ✅ 70+          |
-
-## 🔒 Privacy
-
-All processing happens **in your browser**. No image is uploaded to any server. You can even open the site offline after the first load.
+所有影像處理均在您的瀏覽器中進行，**不會上傳至任何伺服器**。
 
 ## 📄 License
 

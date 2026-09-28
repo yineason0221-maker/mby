@@ -225,23 +225,42 @@ export class CVHandler {
     if (mode === 'gray') {
       const gray = this.cv.Mat();
       this.cv.cvtColor(mat, gray, this.cv.COLOR_RGBA2GRAY);
+      // Contrast boost for photocopier look
+      this.cv.multiply(gray, gray, gray, 1.2, this.cv.CV_8U);
       this.cv.cvtColor(gray, mat, this.cv.COLOR_GRAY2RGBA);
       gray.delete();
       return mat;
     }
     if (mode === 'bw') {
       const gray = this.cv.Mat();
-      const bw = this.cv.Mat();
       this.cv.cvtColor(mat, gray, this.cv.COLOR_RGBA2GRAY);
-      this.cv.GaussianBlur(gray, gray, new this.cv.Size(3, 3), 0);
+
+      // Unsharp mask for crisp text
+      const blurred = this.cv.Mat();
+      this.cv.GaussianBlur(gray, blurred, new this.cv.Size(3, 3), 0);
+      const sharpened = this.cv.Mat();
+      this.cv.subtract(gray, blurred, sharpened);
+      this.cv.add(gray, sharpened, gray);
+      blurred.delete();
+      sharpened.delete();
+
+      const bw = this.cv.Mat();
       this.cv.adaptiveThreshold(
         gray, bw, 255,
         this.cv.ADAPTIVE_THRESH_GAUSSIAN,
-        this.cv.THRESH_BINARY, 11, 6
+        this.cv.THRESH_BINARY, 11, 4
       );
-      this.cv.cvtColor(bw, mat, this.cv.COLOR_GRAY2RGBA);
-      gray.delete();
+
+      // Morphological opening to clean noise
+      const kernel = this.cv.getStructuringElement(this.cv.MORPH_ELLIPSE, new this.cv.Size(3, 3));
+      const cleaned = this.cv.Mat();
+      this.cv.morphologyEx(bw, cleaned, this.cv.MORPH_OPEN, kernel);
+      kernel.delete();
       bw.delete();
+
+      this.cv.cvtColor(cleaned, mat, this.cv.COLOR_GRAY2RGBA);
+      gray.delete();
+      cleaned.delete();
       return mat;
     }
     return mat;

@@ -336,3 +336,36 @@ body {
 .footer a:hover {
   text-decoration: underline;
 }
+
+/* ===== Camera overlay ===== */
+.camera-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #000;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.camera-overlay video {
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+}
+
+.camera-actions {
+  position: absolute;
+  bottom: 2rem;
+  display: flex;
+  gap: 1rem;
+  padding: 0 1rem;
+}
+
+#cameraOverlay.hidden {
+  display: none;
+}
