@@ -7,7 +7,7 @@ const dist = path.join(root, 'dist');
 fs.mkdirSync(dist, { recursive: true });
 
 const dirsToCopy = ['css', 'js'];
-const filesToCopy = ['index.html', 'package.json', 'README.md'];
+const filesToCopy = ['index.html', 'package.json', 'README.md', '.nojekyll'];
 
 function copyDir(src, dest) {
   if (!fs.existsSync(src)) return;
